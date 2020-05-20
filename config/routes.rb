@@ -10,4 +10,7 @@ Rails.application.routes.draw do
   
   get 'signup', to: 'users#new'
   resources :users, only: [:index, :show, :new, :create]
+  # 投稿は見せるのとはまた別に用意する
+  # micropostsの一覧はユーザに紐づけがされているのでtoppagesindexやusersshowで表示させる。
+  resources :microposts, only: [:create, :destroy]
 end
