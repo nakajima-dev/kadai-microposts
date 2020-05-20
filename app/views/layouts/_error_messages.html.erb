@@ -1,0 +1,10 @@
+<% if model.errors.any? %>
+  <div id="error_explanation" class="alert alert-warning">
+    <ul class="mb-0">
+      <!--後でmodelの名前を自分で作成したモデル名に変更することを忘れない-->
+      <% model.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
