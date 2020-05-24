@@ -21,4 +21,5 @@ Rails.application.routes.draw do
   # micropostsの一覧はユーザに紐づけがされているのでtoppagesindexやusersshowで表示させる。
   resources :microposts, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
+  resources :favorites, only:[:create, :destroy]
 end
