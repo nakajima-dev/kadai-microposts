@@ -7,6 +7,8 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   has_secure_password
   
+  
+  # micropostsとの多対多の時
   has_many :microposts
   # 順方向の関係の構築
   has_many :relationships
@@ -16,6 +18,11 @@ class User < ApplicationRecord
   has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'follow_id'
   # 逆方向の関係を利用し、直接自分をフォローしているユーザを取得する。
   has_many :followers, through: :reverses_of_relationship, source: :user
+  
+  # favoritesとの多対多
+  has_many :favorites
+  has_many :fav_posts, through: :favorites, source: :micropost
+  
   
   
   def follow(other_user)
@@ -41,5 +48,21 @@ class User < ApplicationRecord
   # タイムラインの実装
   def feed_microposts
     Micropost.where(user_id: self.following_ids + [self.id])
+  end
+  
+  # ユーザが投稿にお気に入りを付ける、外す。そしてチェック
+  def favorite(micropost)
+    unless micropost.favorites.exists?(self.id)
+      self.favorites.find_or_create_by(micropost_id: micropost.id)
+    end
+  end
+  
+  def unfavorite(micropost)
+    fav = self.favorites.find_or_create_by(micropost_id: micropost.id)
+    fav.destroy if fav
+  end
+  
+  def fav_posts?(micropost)
+    self.fav_posts.exists?(micropost.id)
   end
 end
