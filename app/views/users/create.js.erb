@@ -1,0 +1,2 @@
+$('#count_likes_number').text('<%= @count_likes %>')
+$('#likes_buttons_<%= @like.id %>').html("<%= j(render partial: 'favorites/like_button', locals: {micropost: @like}) %>");

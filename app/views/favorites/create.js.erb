@@ -1,0 +1,4 @@
+$(function() {
+    $('#likes_buttons_<%= @like.id %>').html("<%= j(render partial: 'favorites/like_button', locals: {micropost: @like}) %>");
+    $('#count_likes_number').text("<%= counts(current_user) %>");
+});

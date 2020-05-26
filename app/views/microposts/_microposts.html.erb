@@ -13,7 +13,9 @@
           <% if current_user == micropost.user %>
             <%= link_to "Delete", micropost, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm mr-2' %>
           <% end %>
-          <%= render 'favorites/like_button', micropost: micropost%>
+          <div id="likes_buttons_<%= micropost.id %>">
+            <%= render 'favorites/like_button', micropost: micropost %>
+          </div>
         </div>
       </div>
     </li>

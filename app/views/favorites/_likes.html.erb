@@ -11,9 +11,11 @@
         </div>
         <div class="row">
           <% if current_user == like.user %>
-            <%= link_to "Delete", like, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm mr-2' %>
+            <% link_to "Delete", like, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-danger btn-sm mr-2' %>
           <% end %>
-          <%= render 'favorites/like_button', micropost: like%>
+          <div id="likes_buttons_<%= like.id %>">
+            <%= render 'favorites/like_button', micropost: like%>
+          </div>
         </div>
       </div>
     </li>
